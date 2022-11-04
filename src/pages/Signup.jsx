@@ -46,26 +46,14 @@ export default function SignUp() {
               Ready to watch? Enter your email to create or restart membership
             </h6>
           </div>
-          <div className=" column">
-            <div className="form">
-              <input
-                type="email"
-                placeholder="Email Address"
-                name="email"
-                value={formValues.email}
-                onChange={(e) =>
-                  setFormValues({
-                    ...formValues,
-                    [e.target.name]: e.target.value,
-                  })
-                }
-              />
-              {showPassword && (
+          <div className="text flex column">
+            <div className=" column">
+              <div className="form">
                 <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={formValues.password}
+                  type="email"
+                  placeholder="Email Address"
+                  name="email"
+                  value={formValues.email}
                   onChange={(e) =>
                     setFormValues({
                       ...formValues,
@@ -73,14 +61,30 @@ export default function SignUp() {
                     })
                   }
                 />
-              )}
-              {!showPassword && (
-                <button onClick={() => setShowPassword(true)}>
-                  Get Started
-                </button>
-              )}
+                {showPassword && (
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    value={formValues.password}
+                    onChange={(e) =>
+                      setFormValues({
+                        ...formValues,
+                        [e.target.name]: e.target.value,
+                      })
+                    }
+                  />
+                )}
+                {!showPassword && (
+                  <button onClick={() => setShowPassword(true)}>
+                    Get Started
+                  </button>
+                )}
+              </div>
             </div>
-            <button onClick={handleSignIn}>Sign Up</button>
+            <div className="column">
+              <button onClick={handleSignIn}>Sign Up</button>
+            </div>
           </div>
         </div>
       </div>
@@ -138,7 +142,7 @@ const Container = styled.div`
         }
       }
       button {
-        padding: 0.5rem 1rem;
+        padding: 1rem 2rem;
         background-color: #ffe695;
         border: none;
         cursor: pointer;
