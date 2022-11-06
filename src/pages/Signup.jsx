@@ -10,7 +10,7 @@ import BackgroundImg from "../components/BackgroundImg";
 import Header from "../components/Header";
 import { firebaseAuth } from "../utils/firebase-config,";
 
-export default function SignUp() {
+export default function Signup() {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
