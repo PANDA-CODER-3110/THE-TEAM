@@ -20,7 +20,7 @@ const Container = styled.div`
   padding: 0 5rem;
   .logo {
     img {
-      margin-top: 2rem;
+      margin-top: 1.4rem;
       height: 3.5rem;
     }
   }
