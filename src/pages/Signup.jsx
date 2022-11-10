@@ -1,14 +1,21 @@
-import { async } from "@firebase/util";
+// import { async } from "@firebase/util";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
+import firebase from "firebase/compat/app";
+// import { firebase } from '@firebase/app';
+import 'firebase/auth';
+// import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+// import { Button } from "@material-ui/core";
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackgroundImg from "../components/BackgroundImg";
 import Header from "../components/Header";
 import { firebaseAuth } from "../utils/firebase-config,";
+// import GoogleButton from "react-google-button";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -28,6 +35,14 @@ export default function Signup() {
       console.log(err);
     }
   };
+
+  // function signInWithGoogle() {
+  //   // const provider = new firebase.auth.GoogleAuthProvider();
+  //   console.log("hehe");
+  //   // provider.addScope("profile");
+  //   // provider.addScope("email");
+  //   firebaseAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  // }
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) navigate("/");
@@ -84,6 +99,7 @@ export default function Signup() {
             </div>
             <div className="column">
               <button onClick={handleSignIn}>Sign Up</button>
+              {/* <GoogleButton className="google" onClick={signInWithGoogle} /> */}
             </div>
           </div>
         </div>
