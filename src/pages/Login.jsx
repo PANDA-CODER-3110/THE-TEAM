@@ -1,11 +1,18 @@
-import { async } from "@firebase/util";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+// import { async } from "@firebase/util";
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithRedirect,
+} from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BackgroundImg from "../components/BackgroundImg";
 import Header from "../components/Header";
 import { firebaseAuth } from "../utils/firebase-config,";
+import "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
+import GoogleButton from "react-google-button";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -25,9 +32,19 @@ export default function Login() {
     }
   };
 
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    provider.addScope("profile");
+    provider.addScope("email");
+    await signInWithRedirect(firebaseAuth, provider);
+  };
+
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) navigate("/");
   });
+  
+
+  
 
   return (
     <Container>
@@ -37,7 +54,8 @@ export default function Login() {
         <div className="form-container flex column a-center j-center">
           <div className="form flex column a-center j-center">
             <div className="title">
-              <h3>Login</h3>
+              
+              <h2>Login</h2>
             </div>
             <div className="container flex column">
               <input
@@ -66,6 +84,8 @@ export default function Login() {
               />
 
               <button onClick={handleLogIn}>Log In</button>
+              <p>OR</p>
+              <GoogleButton onClick={signInWithGoogle} />
             </div>
           </div>
         </div>
@@ -85,23 +105,37 @@ const Container = styled.div`
     width: 100vw;
     display: grid;
     grid-template-rows: 15vh 85vh;
+    
     .form-container {
       gap: 2rem;
       height: 85vh;
+      
       .form {
         padding: 2rem;
-        background-color: #000000b0;
-        width: 25vw;
+        background-color: white;
+        border-radius: 0.75rem;
+        width: 9cm;
         gap: 2rem;
         color: white;
+        .title{
+          h2{
+            color: black;
+          }
+        }
         .container {
           gap: 2rem;
           input {
+            align-self: center;
             padding: 0.5rem 1rem;
             width: 15vw;
           }
+          p {
+            align-self: center;
+          }
           button {
             padding: 0.5rem 1rem;
+            align-self: center;
+            width: 15vw;
             background-color: #ffe695;
             border: none;
             cursor: pointer;
